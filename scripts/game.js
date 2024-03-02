@@ -35,8 +35,16 @@ function displayOnAnswerSection() {
 }
 
 function updateDashedWord(word, guessedLetter) {
-  return word.split('').map((letter, index) => (letter === guessedLetter ? guessedLetter : dashedWord[index])).join('');
+  const updatedWord = word.split('').map((letter, index) => (letter === guessedLetter ? guessedLetter : dashedWord[index])).join('');
+  if (updatedWord === word) {
+    setTimeout(function() {
+      alert("Congratulations! You guessed the word: " + randomWord);
+      startNewGame();
+    }, 100);
+  }
+  return updatedWord;
 }
+
 
 function addHangmanPart() {
   switch (incorrectGuesses) {
