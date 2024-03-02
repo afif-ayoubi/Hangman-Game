@@ -35,15 +35,7 @@ function displayOnAnswerSection() {
 }
 
 function updateDashedWord(word, guessedLetter) {
-  let newDashedWord = "";
-  for (let i = 0; i < word.length; i++) {
-    if (word[i] == guessedLetter) {
-      newDashedWord += guessedLetter;
-    } else {
-      newDashedWord += dashedWord[i];
-    }
-  }
-  return newDashedWord;
+  return word.split('').map((letter, index) => (letter === guessedLetter ? guessedLetter : dashedWord[index])).join('');
 }
 
 function addHangmanPart() {
@@ -75,7 +67,7 @@ function addHangmanPart() {
 
 letters.addEventListener("click", function (e) {
   if (e.target.classList.contains("letter")) {
-    const selectedLetter = event.target.textContent;
+    const selectedLetter = e.target.textContent.toLowerCase();
     if (randomWord.includes(selectedLetter)) {
       dashedWord = updateDashedWord(randomWord, selectedLetter);
       displayOnAnswerSection();
